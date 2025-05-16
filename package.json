@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
-    // "deploy": "vercel --prod"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",
