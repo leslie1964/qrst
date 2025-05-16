@@ -82,7 +82,7 @@ export default function BangorLogin() {
   
 
   return (
-    <div className="flex lg:justify-center lg:items-center min-h-screen bg-gray-100">
+    <div className="lg:flex lg:justify-center lg:items-center min-h-screen bg-gray-100">
       <div className="w-full lg:max-w-3xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
         <div className="flex flex-col lg:flex-row">
           {/* Left side - Image or Info */}
