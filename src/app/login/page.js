@@ -79,13 +79,7 @@ export default function BangorLogin() {
   };
 
   // Load saved username on component mount
-  useState(() => {
-    const savedUsername = localStorage.getItem("savedUsername");
-    if (savedUsername) {
-      setUsername(savedUsername);
-      setSaveUsername(true);
-    }
-  }, []);
+  
 
   return (
     <div className="flex lg:justify-center lg:items-center min-h-screen bg-gray-100">
