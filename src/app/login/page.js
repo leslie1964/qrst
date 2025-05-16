@@ -129,7 +129,7 @@ export default function BangorLogin() {
           </div>
           
           {/* Right side - Login Form */}
-          <div className=" w-1/2 lg:p-8 self-center lg:self-start">
+          <div className=" lg:w-1/2 p-4 lg:p-8 self-center lg:self-start">
             {/* Logo */}
             <div className="flex justify-center align-middle mb-6">
               <Image width={"full"}
