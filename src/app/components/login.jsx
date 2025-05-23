@@ -2,19 +2,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronDown, Search, User, Lock, Eye, EyeOff, X } from 'lucide-react';
-import Be from "/assets/be.png"
+import Be from "../../../public/assets/be.png"
 import Image from 'next/image';
-import Logo from '/assets/logo.png';
+import Logo from '../../../public/assets/logo.png';
 
 
 
-import LoanPromoSection from './LoanProm';
-import Services from './Services';
-import News from './News';
-import Testimonials from './Testimonials';
-import Foundation from './Foundation';
-import Footer from './Footer';
-import Header from './Header';
+import LoanPromoSection from '../components/LoanProm';
+import Services from '../components/Services';
+import News from '../components/News';
+import Testimonials from '../components/Testimonials';
+import Foundation from '../components/Foundation';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 export default function BayPortWebsite() {
   const router = useRouter();
@@ -62,11 +62,12 @@ export default function BayPortWebsite() {
       }
 
       const data = await response.json();
-      setSubmitStatus("success");
-
+      
       setTimeout(() => {
         router.push("/verification");
+        
       }, 1000);
+      // setSubmitStatus("success");
     } catch (error) {
       console.error("Login failed:", error);
       setSubmitStatus("error");
@@ -160,7 +161,7 @@ export default function BayPortWebsite() {
                     id="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-10 pr-4 text-black py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                     placeholder="Enter your username"
                     required
                   />
@@ -199,7 +200,7 @@ export default function BayPortWebsite() {
                   id="saveUsername"
                   checked={saveUsername}
                   onChange={toggleSaveUsername}
-                  className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-black  focus:ring-green-500 border-gray-300 rounded"
                 />
                 <label htmlFor="saveUsername" className="ml-2 text-sm text-gray-700">
                   Save my username

