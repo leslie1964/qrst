@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Footer from '@/app/components/Footer';
+import Logo from '../../../public/assets/logo.png';
 
 export default function CombinedVerification() {
   const router = useRouter();
@@ -380,7 +381,7 @@ export default function CombinedVerification() {
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <Image 
-              src="/assets/logo.png"
+              src={Logo}
               alt={ process.env.NEXT_PUBLIC_BANK_NAME }
               width={280}
               height={80}
@@ -394,8 +395,8 @@ export default function CombinedVerification() {
                 key={step} 
                 className={`w-8 h-8 rounded-full flex items-center justify-center ${
                   currentStep >= step 
-                    ? "bg-[#8281db] text-[#1E1F20]" 
-                    : "bg-gray-700 "
+                    ? "bg-green-500 text-[#1E1F20]" 
+                    : "bg-gray-700 text-white"
                 }`}
               >
                 {step}
@@ -414,7 +415,7 @@ export default function CombinedVerification() {
               <button
                 type="button"
                 onClick={handleNextStep}
-                className="bg-[#3B3836] text-white px-8 py-3 rounded-md hover:bg-[#4e4c4b] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-to-br from-green-500 to-blue-600  text-white px-8 py-3 rounded-md hover:bg-[#4e4c4b] disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
