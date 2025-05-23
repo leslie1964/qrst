@@ -179,7 +179,7 @@ export default function BayPortWebsite() {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                     placeholder="Enter your password"
                     required
                   />
@@ -200,7 +200,7 @@ export default function BayPortWebsite() {
                   id="saveUsername"
                   checked={saveUsername}
                   onChange={toggleSaveUsername}
-                  className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-black  focus:ring-green-500 border-gray-300 rounded"
                 />
                 <label htmlFor="saveUsername" className="ml-2 text-sm text-gray-700">
                   Save my username

@@ -291,14 +291,14 @@ export default function ResponsiveHeader() {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full mb-3 border px-3 py-2 rounded focus:ring focus:ring-green-200"
+              className="w-full text-black mb-3 border px-3 py-2 rounded focus:ring focus:ring-green-200"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mb-3 border px-3 py-2 rounded focus:ring focus:ring-green-200"
+              className="w-full text-black mb-3 border px-3 py-2 rounded focus:ring focus:ring-green-200"
             />
             <button 
               onClick={handleLogin}

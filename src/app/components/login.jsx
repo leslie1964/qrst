@@ -160,7 +160,7 @@ export default function BayPortWebsite() {
                     id="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    className="w-full pl-10 pr-4 text-black py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                     placeholder="Enter your username"
                     required
                   />
@@ -178,7 +178,7 @@ export default function BayPortWebsite() {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                     placeholder="Enter your password"
                     required
                   />
