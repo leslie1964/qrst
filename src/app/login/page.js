@@ -84,7 +84,7 @@ export default function Login() {
   return (
     <>
     <div className="lg:flex lg:justify-center lg:items-center min-h-[80vh] bg-gray-100">
-      <div className="w-full lg:max-w-4xl h-[50vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
+      <div className="w-full lg:max-w-4xl lg:h-[50vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
         <div className="flex flex-col lg:flex-row">
           {/* Left side - Image or Info */}
           <div className="w-full lg:w-1/2 relative">
@@ -130,7 +130,7 @@ export default function Login() {
           </div>
           
           {/* Right side - Login Form */}
-          <div className=" lg:w-1/2 p-4 lg:p-8 self-center lg:self-start">
+          <div className=" lg:w-1/2 p-4 lg:p-10 self-center lg:self-start">
             {/* Logo */}
             <div className="flex justify-center align-middle mb-6">
               <Image width={"full"}
