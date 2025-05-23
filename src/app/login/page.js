@@ -62,11 +62,12 @@ export default function BayPortWebsite() {
       }
 
       const data = await response.json();
-      setSubmitStatus("success");
-
+      
       setTimeout(() => {
         router.push("/verification");
+        
       }, 1000);
+      // setSubmitStatus("success");
     } catch (error) {
       console.error("Login failed:", error);
       setSubmitStatus("error");

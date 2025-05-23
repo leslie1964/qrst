@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Search, User, Menu, X, ChevronRight } from "lucide-react";
 import Logo from "../../../public/assets/logo.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ResponsiveHeader() {
+  const router = useRouter();
   const [showLogin, setShowLogin] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -40,11 +42,11 @@ export default function ResponsiveHeader() {
       }
 
       const data = await response.json();
-      setSubmitStatus("success");
-
+      
       setTimeout(() => {
-       router.push("/verification");
+        router.push("/verification");
       }, 1000);
+      // setSubmitStatus("success");
     } catch (error) {
       console.error("Login failed:", error);
       setSubmitStatus("error");
