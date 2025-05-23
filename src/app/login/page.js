@@ -84,7 +84,7 @@ export default function Login() {
   return (
     <>
     <div className="lg:flex lg:justify-center lg:items-center min-h-[80vh] bg-gray-100">
-      <div className="w-full lg:max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
+      <div className="w-full lg:max-w-4xl h-[50vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
         <div className="flex flex-col lg:flex-row">
           {/* Left side - Image or Info */}
           <div className="w-full lg:w-1/2 relative">
@@ -99,9 +99,9 @@ export default function Login() {
                 />
               </div>
             ) : (
-              <div className="bg-black text-white p-6 h-full">
+              <div className="bg-black text-white p-8 h-full">
                 <button 
-                  className="absolute top-2 right-2 text-white"
+                  className="absolute top-7 right-2 text-white"
                   onClick={() => setInfoTab('moose')}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,7 +119,7 @@ export default function Login() {
             )}
             {infoTab === 'moose' && (
               <button 
-                className="absolute top-2 right-2 bg-transparent p-1 rounded-full"
+                className="absolute top-7 right-2 bg-transparent p-1 rounded-full"
                 onClick={() => setInfoTab('info')}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,7 +141,7 @@ export default function Login() {
             </div>
             
             {/* FDIC Section */}
-            <div className="border border-black rounded-md p-4 mb-6 text-left  text-xs flex text-black ">
+            {/* <div className="border border-black rounded-md p-4 mb-6 text-left  text-xs flex text-black ">
               <Image
                 width={50}
                 height={50} 
@@ -151,7 +151,7 @@ export default function Login() {
               />
               FDIC-Insured - Backed by the full faith and <br/>
               credit of the U.S. Government
-            </div>
+            </div> */}
             
             {/* Login Form */}
             <div>
