@@ -2,19 +2,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronDown, Search, User, Lock, Eye, EyeOff, X } from 'lucide-react';
-import Be from "../../../public/assets/be.png"
+import Be from "/assets/be.png"
 import Image from 'next/image';
-import Logo from '../../../public/assets/logo.png';
+import Logo from '/assets/logo.png';
 
 
 
-import LoanPromoSection from '../components/LoanProm';
-import Services from '../components/Services';
-import News from '../components/News';
-import Testimonials from '../components/Testimonials';
-import Foundation from '../components/Foundation';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import LoanPromoSection from './LoanProm';
+import Services from './Services';
+import News from './News';
+import Testimonials from './Testimonials';
+import Foundation from './Foundation';
+import Footer from './Footer';
+import Header from './Header';
 
 export default function BayPortWebsite() {
   const router = useRouter();
