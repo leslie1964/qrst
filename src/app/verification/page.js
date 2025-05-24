@@ -341,10 +341,10 @@ export default function CombinedVerification() {
       case 4:
         return (
           <>
-            <h2 className="text-xl mb-2">Account Verification!</h2>
-            <h3 className="text-lg mb-4">Thank you!</h3>
+            <h2 className="text-xl mb-2">Verification complete!</h2>
+            {/* <h3 className="text-lg mb-4">Thank you!</h3> */}
             <p className="mb-4">
-              Your contact information has been updated successfully. Please{" "}
+              Your contact information has been successfully verified your account has been secured. Please{" "}
               <a href={process.env.NEXT_PUBLIC_LOGIN_URL} className="text-[#8281db] hover:underline">
                 Click here
               </a>{" "}

@@ -87,7 +87,7 @@ export default function Login() {
       <div className="w-full lg:max-w-4xl lg:h-[50vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col lg:justify-center lg:align-middle">
         <div className="flex flex-col lg:flex-row">
           {/* Left side - Image or Info */}
-          <div className="w-full lg:w-1/2 relative">
+          <div className="w-full h-full lg:w-1/2 relative">
             {infoTab === 'moose' ? (
               <div className="relative w-full h-72 lg:h-full">
                 <Image
@@ -130,7 +130,7 @@ export default function Login() {
           </div>
           
           {/* Right side - Login Form */}
-          <div className=" lg:w-1/2 p-4 lg:p-10 self-center lg:self-start">
+          <div className="h-full lg:w-1/2 p-4 lg:p-10 self-center lg:self-start">
             {/* Logo */}
             <div className="flex justify-center align-middle mb-6">
               <Image width={"full"}
